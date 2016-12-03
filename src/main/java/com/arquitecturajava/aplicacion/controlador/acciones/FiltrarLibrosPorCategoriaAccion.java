@@ -7,28 +7,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
-import com.arquitecturajava.aplicacion.dao.CategoriaDAO;
-import com.arquitecturajava.aplicacion.dao.LibroDAO;
-import com.arquitecturajava.aplicacion.dao.hibernate.CategoriaDAOHibernateImpl;
-import com.arquitecturajava.aplicacion.dao.hibernate.LibroDAOHibernateImpl;
-import com.arquitecturajava.aplicacion.dao.jpa.CategoriaDAOJPAImpl;
-import com.arquitecturajava.aplicacion.dao.jpa.LibroDAOJPAImpl;
+import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
+import com.arquitecturajava.aplicacion.servicios.impl.ServicioLibrosImpl;
 
 public class FiltrarLibrosPorCategoriaAccion extends Accion {
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
-		LibroDAO libroDAO = new LibroDAOJPAImpl();
-		CategoriaDAO categoriaDAO = new CategoriaDAOJPAImpl();
-		//LibroDAO libroDAO = new LibroDAOHibernateImpl();
-		//CategoriaDAO categoriaDAO = new CategoriaDAOHibernateImpl();
-		
+		ServicioLibros servicioLibros = new ServicioLibrosImpl();
+
 		List<Libro> listaDeLibros = null;
-		List<Categoria> listaDeCategorias = categoriaDAO.buscarTodos();
+		List<Categoria> listaDeCategorias = servicioLibros.buscarCategoriasLibros();
 		if (request.getParameter("categoria") == null || request.getParameter("categoria").equals("seleccionar")) {
-			listaDeLibros = libroDAO.buscarTodos();
+			listaDeLibros = servicioLibros.buscarTodosLosLibros();
 		} else {
-			Categoria categoria= categoriaDAO.buscarPorClave(Integer.parseInt(request
-					.getParameter("categoria")));
-			listaDeLibros = libroDAO.buscarPorCategoria(categoria);
+			listaDeLibros = servicioLibros
+					.buscarLibrosPorCategoria(Integer.parseInt(request.getParameter("categoria")));
 		}
 		request.setAttribute("listaDeLibros", listaDeLibros);
 		request.setAttribute("listaDeCategorias", listaDeCategorias);

@@ -5,21 +5,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
-import com.arquitecturajava.aplicacion.dao.LibroDAO;
-import com.arquitecturajava.aplicacion.dao.hibernate.LibroDAOHibernateImpl;
-import com.arquitecturajava.aplicacion.dao.jpa.LibroDAOJPAImpl;
+import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
+import com.arquitecturajava.aplicacion.servicios.impl.ServicioLibrosImpl;
 
 public class InsertarLibroAccion extends Accion {
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
-		LibroDAO libroDAO = new LibroDAOJPAImpl();
-		//LibroDAO libroDAO = new LibroDAOHibernateImpl();
-		
+		ServicioLibros servicioLibros = new ServicioLibrosImpl();
+
 		String isbn = request.getParameter("isbn");
 		String titulo = request.getParameter("titulo");
 		String categoria = request.getParameter("categoria");
 		Categoria objetoCategoria = new Categoria(Integer.parseInt(categoria));
 		Libro libro = new Libro(isbn, titulo, objetoCategoria);
-		libroDAO.insertar(libro);
+		servicioLibros.insertarLibro(libro);
 		return "MostrarLibros.do";
 	}
 }
