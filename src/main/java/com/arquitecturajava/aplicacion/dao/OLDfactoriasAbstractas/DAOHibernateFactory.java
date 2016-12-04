@@ -1,8 +1,9 @@
-package com.arquitecturajava.aplicacion.dao.hibernate;
+package com.arquitecturajava.aplicacion.dao.OLDfactoriasAbstractas;
 
 import com.arquitecturajava.aplicacion.dao.CategoriaDAO;
-import com.arquitecturajava.aplicacion.dao.DAOFactory;
 import com.arquitecturajava.aplicacion.dao.LibroDAO;
+import com.arquitecturajava.aplicacion.dao.hibernate.CategoriaDAOHibernateImpl;
+import com.arquitecturajava.aplicacion.dao.hibernate.LibroDAOHibernateImpl;
 
 public class DAOHibernateFactory implements DAOFactory {
 	public CategoriaDAO getCategoriaDAO() {

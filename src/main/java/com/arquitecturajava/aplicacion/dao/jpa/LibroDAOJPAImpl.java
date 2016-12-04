@@ -16,8 +16,7 @@ public class LibroDAOJPAImpl extends GenericDAOJPAImpl<Libro, String> implements
 	private static final Logger log = Logger.getLogger(LibroDAOJPAImpl.class.getPackage().getName());
 
 	public List<Libro> buscarPorCategoria(Categoria categoria) {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		TypedQuery<Libro> consulta = manager.createQuery("Select l from Libro l where l.categoria=?1", Libro.class);
 		consulta.setParameter(1, categoria);
 		List<Libro> listaDeLibros = null;
@@ -31,8 +30,7 @@ public class LibroDAOJPAImpl extends GenericDAOJPAImpl<Libro, String> implements
 	
 	@Override
 	public List<Libro> buscarTodos() {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
+		EntityManager manager = entityManagerFactory.createEntityManager();
 		List<Libro> listaDeLibros = null;
 		try {
 			TypedQuery<Libro> consulta = manager.createQuery("SELECT l FROM Libro l JOIN FETCH l.categoria",Libro.class);

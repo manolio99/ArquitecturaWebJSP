@@ -5,8 +5,6 @@ import java.util.List;
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 import com.arquitecturajava.aplicacion.dao.CategoriaDAO;
-import com.arquitecturajava.aplicacion.dao.DAOAbstractFactory;
-import com.arquitecturajava.aplicacion.dao.DAOFactory;
 import com.arquitecturajava.aplicacion.dao.LibroDAO;
 import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
 
@@ -14,16 +12,10 @@ public class ServicioLibrosImpl implements ServicioLibros {
 	private LibroDAO libroDAO = null;
 	private CategoriaDAO categoriaDAO = null;
 
-	public ServicioLibrosImpl() {
-		DAOFactory factoria = DAOAbstractFactory.getInstance();
-		libroDAO = factoria.getLibroDAO();
-		categoriaDAO = factoria.getCategoriaDAO();
-	}
-
 	public void insertarLibro(Libro libro) {
 		libroDAO.insertar(libro);
 	}
-	
+
 	public void salvarLibro(Libro libro) {
 		libroDAO.salvar(libro);
 	}
@@ -52,4 +44,23 @@ public class ServicioLibrosImpl implements ServicioLibros {
 		Categoria categoria = categoriaDAO.buscarPorClave(id);
 		return libroDAO.buscarPorCategoria(categoria);
 	}
+
+	// GETTERS Y SETTERS
+	
+	public LibroDAO getLibroDAO() {
+		return libroDAO;
+	}
+
+	public void setLibroDAO(LibroDAO libroDAO) {
+		this.libroDAO = libroDAO;
+	}
+
+	public CategoriaDAO getCategoriaDAO() {
+		return categoriaDAO;
+	}
+
+	public void setCategoriaDAO(CategoriaDAO categoriaDAO) {
+		this.categoriaDAO = categoriaDAO;
+	}
+	
 }

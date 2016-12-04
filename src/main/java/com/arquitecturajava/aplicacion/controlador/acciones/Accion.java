@@ -3,6 +3,9 @@ package com.arquitecturajava.aplicacion.controlador.acciones;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 public abstract class Accion {
 	public abstract String ejecutar(HttpServletRequest request, HttpServletResponse response);
 
@@ -19,6 +22,12 @@ public abstract class Accion {
 			e.printStackTrace();
 		}
 		return accion;
+	}
+
+	public Object getBean(String nombre, HttpServletRequest request) {
+		WebApplicationContext factoria = WebApplicationContextUtils
+				.getRequiredWebApplicationContext(request.getSession().getServletContext());
+		return factoria.getBean(nombre);
 	}
 
 }

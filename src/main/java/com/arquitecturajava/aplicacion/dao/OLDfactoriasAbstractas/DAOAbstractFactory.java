@@ -1,7 +1,4 @@
-package com.arquitecturajava.aplicacion.dao;
-
-import com.arquitecturajava.aplicacion.dao.hibernate.DAOHibernateFactory;
-import com.arquitecturajava.aplicacion.dao.jpa.DAOJPAFactory;
+package com.arquitecturajava.aplicacion.dao.OLDfactoriasAbstractas;
 
 public abstract class DAOAbstractFactory {
 	public static DAOFactory getInstance() {
