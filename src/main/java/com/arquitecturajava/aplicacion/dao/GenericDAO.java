@@ -11,4 +11,6 @@ public interface GenericDAO<T, Id extends Serializable> {
 	void salvar(T objeto);
 
 	void borrar(T objeto);
+	
+	void insertar(T objeto);
 }
