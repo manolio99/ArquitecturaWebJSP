@@ -15,6 +15,9 @@ public class ControladorLibros extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// URL ACCESO
+		// http://localhost:8080/ArquitecturaWebJSF/MostrarLibros.do
+		
 		RequestDispatcher despachador = null;
 		Accion accion = null;
 		String url = request.getServletPath();
